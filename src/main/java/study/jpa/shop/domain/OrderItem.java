@@ -1,16 +1,20 @@
 package study.jpa.shop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import study.jpa.shop.domain.item.Item;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.*;
+import static lombok.AccessLevel.*;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
