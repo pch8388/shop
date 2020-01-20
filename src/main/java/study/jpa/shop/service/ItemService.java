@@ -27,4 +27,9 @@ public class ItemService {
     public List<Item> findItems() {
         return itemRepository.findAll();
     }
+
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.change(name, price, stockQuantity);
+    }
 }
