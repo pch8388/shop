@@ -11,6 +11,7 @@ import study.jpa.shop.domain.item.Item;
 import study.jpa.shop.repository.ItemRepository;
 import study.jpa.shop.repository.MemberRepository;
 import study.jpa.shop.repository.OrderRepository;
+import study.jpa.shop.repository.OrderSearch;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class OrderService {
     }
 
     //검색
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return orderRepository.findOrders(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
+    }
 }
