@@ -12,9 +12,8 @@ import study.jpa.shop.repository.OrderSearch;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 /**
  * xToOne(ManyToOne, OneToOne)
