@@ -31,6 +31,15 @@ public class OrderApiController {
             .collect(toList());
     }
 
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3() {
+        // collect 을 fetch 조인하면 paging 을 할 수 없다. -> 모든 list 를 호출한 후에 memory 에서 잘라내기 때문
+        return orderRepository.findAllWithItem()
+            .stream()
+            .map(OrderDto::new)
+            .collect(toList());
+    }
+
     @Getter
     static class OrderDto {
 
