@@ -3,6 +3,7 @@ package study.jpa.shop.api;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.jpa.shop.domain.Address;
 import study.jpa.shop.domain.Order;
@@ -35,6 +36,16 @@ public class OrderApiController {
     public List<OrderDto> ordersV3() {
         // collect 을 fetch 조인하면 paging 을 할 수 없다. -> 모든 list 를 호출한 후에 memory 에서 잘라내기 때문
         return orderRepository.findAllWithItem()
+            .stream()
+            .map(OrderDto::new)
+            .collect(toList());
+    }
+
+    @GetMapping("/api/v3.1/orders")
+    public List<OrderDto> ordersV3_page(@RequestParam(value = "offset", defaultValue = "0") int offset,
+                                        @RequestParam(value = "limit", defaultValue = "100") int limit) {
+
+        return orderRepository.findAllWithMemberDelivery(offset, limit)
             .stream()
             .map(OrderDto::new)
             .collect(toList());
