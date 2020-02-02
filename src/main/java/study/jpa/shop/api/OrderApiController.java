@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import study.jpa.shop.api.query.OrderQueryDto;
+import study.jpa.shop.api.query.OrderQueryRepository;
 import study.jpa.shop.domain.Address;
 import study.jpa.shop.domain.Order;
 import study.jpa.shop.domain.OrderItem;
@@ -14,15 +16,15 @@ import study.jpa.shop.repository.OrderSearch;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequiredArgsConstructor
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
@@ -49,6 +51,11 @@ public class OrderApiController {
             .stream()
             .map(OrderDto::new)
             .collect(toList());
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4() {
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
     @Getter
